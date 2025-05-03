@@ -17,6 +17,10 @@ module TicTacToe
       success
     end
 
+    def executed?
+      @executed
+    end
+
     def undo
       # Only undo if command was previously executed
       if @executed

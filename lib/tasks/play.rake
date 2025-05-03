@@ -20,9 +20,9 @@ task :default => :play
 task :play do
   # binding.pry
   game = TicTacToe::GameBuilder.new
-                               .with_player("Player 1", "X", type: :human)
+                               .with_player("Player 1", "X", type: :ai)
                                .with_player("Player 2", "O", type: :ai)
-                               .with_board(3)
+                               .with_board(21)
                                .build
 
   logger = TicTacToe::GameLogger.new

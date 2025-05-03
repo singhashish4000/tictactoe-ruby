@@ -5,13 +5,22 @@ module TicTacToe
     end
 
     def execute(command)
-      @history << command
-      command.execute
+      success = command.execute
+      if success
+        @history << command
+      end
+      success
     end
 
     def undo
+      return false if @history.empty?
+
       command = @history.pop
-      command.undo if command
+      command.undo
+    end
+
+    def history
+      @history
     end
   end
 end
