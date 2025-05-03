@@ -6,9 +6,16 @@ module TicTacToe
     def make_move(board)
       puts "#{name} (#{mark}), enter your move (row col):"
       loop do
-        input = gets.chomp.split.map(&:to_i)
-        if input.length == 2
-          x, y = input
+        input = gets.chomp.downcase.strip
+
+        # check if input is undo command
+        if input == 'undo'
+          return :undo
+        end
+        input_parts = input.split.map(&:to_i)
+        if input_parts.length == 2
+          x, y = input_parts
+
           if board.valid_move?(x, y)
             return {x: x, y: y}
           else

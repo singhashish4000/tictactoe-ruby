@@ -41,6 +41,15 @@ module TicTacToe
       end
     end
 
+    def clear_cell(x, y)
+      if x.between?(0, size - 1) && y.between?(0, size - 1)
+        @grid[x][y] = nil
+        true
+      else
+        false
+      end
+    end
+
     private
 
     def rows
