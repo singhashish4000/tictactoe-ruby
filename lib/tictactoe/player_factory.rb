@@ -5,14 +5,16 @@
 
 module TicTacToe
   class PlayerFactory
-    def self.create(name, mark, type)
-      case type
+    def self.create(definition, all_definitions)
+      case definition[:type]
       when :human
-        HumanPlayer.new(name, mark)
+        HumanPlayer.new(definition[:name], definition[:mark])
       when :ai
-        AIPlayer.new(name, mark)
+        opponent_definition = all_definitions.find { |d| d[:mark] != definition[:mark] }
+        opponent_mark = opponent_definition ? opponent_definition[:mark] : nil # Get opponent's mark
+        AIPlayer.new(definition[:name], definition[:mark], opponent_mark)
       else
-        raise ArgumentError, "Unknown player type: #{type}"
+        raise ArgumentError, "Unknown player type: #{definition[:type]}"
       end
     end
   end

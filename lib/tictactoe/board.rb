@@ -15,7 +15,8 @@ module TicTacToe
     end
 
     def valid_move?(x, y)
-      x.between?(0, size - 1) && y.between?(0, size - 1) && grid[x][y].nil?
+      # binding.pry
+      x.between?(0, size - 1) && y.between?(0, size - 1) && @grid[x][y].nil?
     end
 
     def full?
@@ -48,6 +49,16 @@ module TicTacToe
       else
         false
       end
+    end
+
+    def deep_dup
+      new_board = Board.new(@size)
+      @grid.each_with_index do |row, r_idx|
+        row.each_with_index do |cell, c_idx|
+          new_board.grid[r_idx][c_idx] = cell
+        end
+      end
+      new_board
     end
 
     private
